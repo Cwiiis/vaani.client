@@ -36,6 +36,8 @@ function listen() {
 
     var samples;
     while ((samples = stream.read(VAD_BYTES))) {
+      console.log('data.... Vad:' +  Wakeword.decoder.processWebrtcVad(samples));
+
       streamToServer(samples);
       if (Date.now() - wakeTime > MAX_LISTEN_TIME || !vad(samples)) {
         Wakeword.stop();
